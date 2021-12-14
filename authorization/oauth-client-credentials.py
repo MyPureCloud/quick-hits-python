@@ -5,7 +5,7 @@ print("---------------------------------------------------")
 print("- Genesys Cloud Python Client Credentials Example -")
 print("---------------------------------------------------")
 
-# >> START oauth-client-credentials-step-1
+# >> START oauth-client-credentials-step-1 
 CLIENT_ID = os.environ['GENESYS_CLOUD_CLIENT_ID']
 CLIENT_SECRET = os.environ['GENESYS_CLOUD_CLIENT_SECRET']
 ENVIRONMENT = os.environ['GENESYS_CLOUD_ENVIRONMENT'] # eg. mypurecloud.com
@@ -22,7 +22,7 @@ request_headers = {
 request_body = {
     "grant_type": "client_credentials"
 }
-# >> END oauth-client-credentials-step-1
+# >> END oauth-client-credentials-step-1 
 
 # Get token
 response = requests.post(f"https://login.{ENVIRONMENT}/oauth/token", data=request_body, headers=request_headers)
@@ -37,7 +37,7 @@ else:
 # Get JSON response body
 response_json = response.json()
 
-# >> START oauth-client-credentials-step-2
+# >> START oauth-client-credentials-step-2 
 # Prepare for GET /api/v2/authorization/roles request
 requestHeaders = {
     "Authorization": f"{ response_json['token_type'] } { response_json['access_token']}"
@@ -59,6 +59,7 @@ for entity in response.json()["entities"]:
     print(f"  { entity['name'] }")
 
 print("\nDone")
-# >> END oauth-client-credentials-step-2
+# >> END oauth-client-credentials-step-2 
+
 # >> END oauth-client-credentials
 
