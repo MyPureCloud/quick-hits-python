@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Public Client Flow</title>
+
+  <script src='//code.jquery.com/jquery-1.11.2.min.js'></script>
+  <script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+  <script>
+  // Implicit grant credentials
+  const CLIENT_ID = '--- Implicit Grant Client ID ---';
+
+  // Genesys Cloud environment
+  const ENVIRONMENT = 'mypurecloud.com';
+
+// >> START oauth-implicit-step-2  
+  function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\#&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.hash);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+    if(window.location.hash) {
+        console.log(location.hash);
+        console.log(getParameterByName('access_token'));
+// >> END oauth-implicit-step-2
+        $.ajax({
+         url: "/token/" + getParameterByName('access_token'),
+         type: "GET",
+         success: function(data) { }
+      });
+
+      location.hash=''
+
+    } else {
+// >> START oauth-implicit-step-1
+        var queryStringData = {
+            response_type : "token",
+            client_id : CLIENT_ID,
+            redirect_uri : "http://localhost:8080/"
+        }
+
+        window.location.replace(`https://login.${ENVIRONMENT}/oauth/authorize?` + jQuery.param(queryStringData));
+    }
+// >> END oauth-implicit-step-1
+  </script>
+</head>
+<body>
+    Authentication complete.
+</body>
+</html>
