@@ -1,4 +1,4 @@
-# >> START number-of-agent-in-queue-step-4
+# >> START real-time-queue-observation-query-step-4
 {
     "results": [
     {
@@ -127,4 +127,4 @@
     }
     ]
 }
-# >> END number-of-agent-in-queue-step-4
+# >> END real-time-queue-observation-query-step-4
