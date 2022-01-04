@@ -1,4 +1,4 @@
-# >> START number-of-agent-in-queue
+# >> START number-of-agents-on-queue
 import os
 import PureCloudPlatformClientV2
 from PureCloudPlatformClientV2.rest import ApiException
@@ -7,7 +7,7 @@ print('-----------------------------------------------------------------')
 print('- Python3 Get Number of On-Queue Agents using Genesys Cloud SDK -')
 print('-----------------------------------------------------------------')
 
-# >> START number-of-agent-in-queue-step-1
+# >> START number-of-agents-on-queue-step-1
 # Credentials
 CLIENT_ID = os.environ['GENESYS_CLOUD_CLIENT_ID']
 CLIENT_SECRET = os.environ['GENESYS_CLOUD_CLIENT_SECRET']
@@ -20,15 +20,15 @@ PureCloudPlatformClientV2.configuration.host = region.get_api_host()
 # OAuth when using Client Credentials
 api_client = PureCloudPlatformClientV2.api_client.ApiClient() \
             .get_client_credentials_token(CLIENT_ID, CLIENT_SECRET)
-# >> END number-of-agent-in-queue-step-1
+# >> END number-of-agents-on-queue-step-1
 
-# >> START number-of-agent-in-queue-step-2
+# >> START number-of-agents-on-queue-step-2
 # Create an instance of the Routing API and Analytics API
 routing_api = PureCloudPlatformClientV2.RoutingApi(api_client)
 analytics_api = PureCloudPlatformClientV2.AnalyticsApi(api_client)
-# >> END number-of-agent-in-queue-step-2
+# >> END number-of-agents-on-queue-step-2
 
-# >> START number-of-agent-in-queue-step-3
+# >> START number-of-agents-on-queue-step-3
 def get_on_queue_agents(queue_name):
     """ Get number of agents active on a queue given the name of the queue.
     Args:
@@ -77,10 +77,10 @@ def get_on_queue_agents(queue_name):
         print("Error on RoutingAPI -> " + e.body)
 
     return on_queue_agents
-# >> END number-of-agent-in-queue-step-3
+# >> END number-of-agents-on-queue-step-3
 
 if __name__ == "__main__":
     queue_name = input("Enter queue name: ")
     on_queue_agents = get_on_queue_agents(queue_name)
     print(f"Number of agents in \"{queue_name}\": {on_queue_agents}")
-# >> END number-of-agent-in-queue
+# >> END number-of-agents-on-queue
