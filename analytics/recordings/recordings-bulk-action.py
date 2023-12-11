@@ -29,10 +29,12 @@ recording_api = PureCloudPlatformClientV2.RecordingApi(api_client)
 
 # >> START recordings-bulk-action-step-2
 # Build the create job query, for export action, set query.action = "EXPORT"
+# For delete action, set query.action = "DELETE"
+# For archive action, set query.action = "ARCHIVE"
 query = PureCloudPlatformClientV2.RecordingJobsQuery()
 query.action = "EXPORT"
 query.action_date = "2029-01-01T00:00:00.000Z"
-# Comment out integration id if using DELETE
+# Comment out integration id if using DELETE or ARCHIVE
 query.integration_id = ""
 query.conversation_query = {
     "interval": "2019-01-01T00:00:00.000Z/2019-07-10T00:00:00.000Z",
