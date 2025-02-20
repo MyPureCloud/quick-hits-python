@@ -24,7 +24,7 @@ Required Environment Variables:
 To run:
 -------
 1. Set up the required environment variables
-2. Run: python script_name.py
+2. Run: python user_last_login.py
 
 Output:
 -------
