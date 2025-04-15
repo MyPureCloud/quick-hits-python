@@ -53,7 +53,17 @@ except ApiException as e:
     sys.exit()
 # >> END upload-prompts-step-3
 
-# >> START upload-prompts-step-4
+# >> START request-presigned-url-step-4
+# Request presigned URL for upload
+print("Requesting presigned URL...")
+try:
+    presigned_url_response = architect_api.post_architect_prompt_resources_uploads(prompt_resource.promptId, prompt_resource.language)
+except ApiException as e:
+    print(f"Exception when calling ArchitectApi->post_architect_prompt_resources_uploads: {e}")
+    sys.exit()
+# >> END request-presigned-url-step-4
+
+# >> START upload-prompts-step-5
 # Upload WAV file to prompt
 print("Uploading prompt...")
 
@@ -61,11 +71,11 @@ wav_form_data = {
     'file': ('prompt-example.wav', open('../prompt-example.wav', 'rb'))
 }
 
-upload_response = requests.post(prompt_resource.upload_uri, files=wav_form_data,
-                                headers={"Authorization": f"bearer {api_client.access_token}"})
+upload_response = requests.post(presigned_url_response.url, files=wav_form_data,
+                                headers={"Authorization": f"bearer {api_client.access_token}", **presigned_url_response.headers})
 
 print("Upload complete. Review your prompt in architect.")
 print("https://apps.mypurecloud.com/architect/#/call/userprompts")
 pprint(upload_response)
-# >> END upload-prompts-step-4
+# >> END upload-prompts-step-5
 # >> END upload-prompts
